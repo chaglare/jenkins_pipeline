@@ -1,6 +1,6 @@
 node {
     stage("Say Hello"){
-        properties([parameters([string(defaultValue: 'Caglar', description: 'Paste your name', name: 'NAME', trim: false)]), pipelineTriggers([cron('* * * * *')])])
+        git "https://github.com/chaglare/jenkins.git"
         sh "echo Hello ${NAME}"
     }
 }
