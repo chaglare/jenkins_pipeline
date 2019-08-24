@@ -6,4 +6,13 @@ node {
     stage("Install Apache"){
         sh "ssh   ec2-user@${Remote_instance}   sudo yum install httpd -y "
     }
+    stage("Create Index.html"){
+        sh "scp  index.html  ec2-user@${Remote_instance}:/tmp "
+    }
+    stage("Move File"){
+        sh "ssh   ec2-user@${Remote_instance}    sudo mv /tmp/index.html  /var/www/html/index.html"
+    }
+    stage(){
+        sh "ssh   ec2-user@${Remote_instance}    sudo systemctl start httpd "
+    }
 }
